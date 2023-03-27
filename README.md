@@ -3,6 +3,8 @@
 
 ## 하드웨어
 
+희도야 언제올리니
+
 <img src="https://user-images.githubusercontent.com/86779278/227450107-f5520905-edb5-424f-b13c-5caeb32f6edc.png">
 
 
