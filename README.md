@@ -1,5 +1,5 @@
-# VR-BaseBall-Game
-<<<<<<< HEAD
+# VR-BaseBallGame
+파일 현재태오류 상태
 
 ## 하드웨어
 
