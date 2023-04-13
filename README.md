@@ -11,55 +11,162 @@
 ![image](https://user-images.githubusercontent.com/86779278/227450451-0f88e59a-e189-4eaa-9378-2f05246e7b74.png)
 
 
-액추에이터를 제외한 모든 센서는 보드로부터 전력을 공급받고 액추에이터는 배터리에서 직접 공급받습니다.
-
-배터리의 전력 14.8V가 레귤레이터를 거쳐 5V로 변환된 후 보드에 공급되고 액추에이터를 제외한 모든 센서가 보드로부터 5V를 공급받습니다.
-
-액추에이터는 레귤레이터를 거치지 않은 배터리의 전력 14.8V으로 직접 공급받습니다. 
+액추에이터를 제외한 모든 센서는 보드로부터 전력을 공급받고 액추에이터는 배터리에서 직접 공급받습니다.<br>
+배터리의 전력 14.8V가 레귤레이터를 거쳐 5V로 변환된 후 보드에 공급되고 액추에이터를 제외한 모든 센서가 보드로부터 5V를 공급받습니다.<br>
+액추에이터는 레귤레이터를 거치지 않은 배터리의 전력 14.8V으로 직접 공급받습니다. <br>
 
 ### 배트구성
 
 배트는 배트 하우징, NUCLEO-F446RE(보드), 액추에이터, 바이브레이터, 버튼, 블루투스 모듈, AHRS, 레귤레이터, 배터리로 구성되어있습니다.
 
-- 배트 하우징
+#### 배트 하우징
+
+![ss](https://user-images.githubusercontent.com/81669996/231773694-dfc82d81-9534-4807-b433-44c264ef2d14.png)
 
 배트 하우징은 배트를 구성하는 여러 부품과 실제 배트 사이즈를 고려하여 직접 모델링해서 3D프린터로 출력하였습니다.
 
-- NUCLEO-F446RE(보드)
+#### NUCLEO-F446RE(보드)
 
 작성한 코드를 보드에 넣어 연결된 모든 센서를 제어합니다.
 
-- 액추에이터
+#### 액추에이터
 
-배터리에서 14.8V의 전력을 직접 공급받습니다. 
-
+배터리에서 14.8V의 전력을 직접 공급받습니다. <br>
 배트를 3등분 하여 각 부분에 배치했고, 인게임에서 공이 맞은 부분에 따라 데이터가 들어오면 액추에이터가 작동하도록 하여 타격감을 더했습니다.
 
-- 바이브레이터
+#### 바이브레이터
 
-바이브레이터는 하나가 부착되어 있기 때문에 각 액추에이터가 작동할 때 마다 작동하도록 하였습니다. 액추에이터가 작동할 때 마다 진동이 울리기 때문에 더욱 현실감 있는 타격감을 만들어 냈습니다.
+바이브레이터는 하나가 부착되어 있기 때문에 각 액추에이터가 작동할 때 마다 작동하도록 하였습니다.<br>
+액추에이터가 작동할 때 마다 진동이 울리기 때문에 더욱 현실감 있는 타격감을 만들어 냈습니다.
 
-- 버튼
+#### 버튼
 
 버튼은 두 개를 연결하여 각 버튼을 누를 시 데이터를 보내 투구와 배트 위치 초기화의 역할을 수행합니다.
 
-- 블루투스 모듈
+#### 블루투스 모듈
 
 블루투스 모듈을 연결하여 무선으로 컴퓨터와 연결이 가능하도록 해 인게임과 배트 간에 데이터 입출력을 무선으로 할 수 있도록 했습니다. 
 
-- AHRS
+#### AHRS
 
 배트의 각속도 값, 위치 값을 얻기 위한 센서입니다. AHRS를 통해 얻은 데이터를 인게임으로 보내 배트의 움직임을 구현합니다.
 
-- 레귤레이터
+#### 레귤레이터
 
 연결된 배터리는 14.8V이지만 보드에 필요한 전력은 5V이기 때문에 5V로 변환해 보드로 전력을 공급합니다.
 
-- 배터리
+#### 배터리
 
-3.7V배터리 4개를 사용하여 보드 및 액추에이터에 전력을 공급합니다. 
-
+3.7V배터리 4개를 사용하여 보드 및 액추에이터에 전력을 공급합니다. <br>
 배트에 배터리를 내장시켰기 때문에 실제 야구배트와 마찬가지로 자유로운 움직임을 가질 수 있습니다.
+
+```c
+#include "mbed.h"
+
+DigitalOut IN1(A5),IN3(A4),IN5(D3),vib(A3);
+Ticker t2,t3,t4,t5;
+Serial AHRS(D8, D2,115200);
+Serial PC(USBTX, USBRX);
+Serial BLUETOOTH(A0, A1,115200);
+DigitalIn button1(D5, PullDown);
+DigitalIn button2(D6, PullDown);
+bool flag1=false;
+bool flag2=false;
+bool flag3=false;
+bool flag4=false;
+bool flag5=false;
+bool flag6=false;
+
+void act() //각 flag의  따라 액추에이터,진동모터 
+{
+    if (flag1 == true)
+    {
+        IN1 = 0;
+        vib = 0;
+        flag1 = false;  
+    }else if( flag2 ==true)
+    {
+        IN5 = 0;
+        vib = 0;
+        flag2 = false;  
+    }else if(flag3==true)
+    {
+        IN3 = 0;
+        vib = 0;
+        flag3 = false;  
+    }else if(flag6==true)  
+    {
+        IN1 = 1;
+        IN3 = 1;
+        IN5 = 1;
+        vib = 1;
+        AHRS.puts("<posz>");
+        flag6=false;
+        }
+    else
+    {   
+        IN1 = 1;
+        IN3 = 1;
+        IN5 = 1;
+        vib = 1;
+    }       
+} 
+
+void read() //값을 읽어오는 함수
+{
+    if(BLUETOOTH.readable()){
+        char c=BLUETOOTH.getc();
+        if(c=='1'&&flag1==false) {
+            flag1=true;       
+        }
+        if(c=='2'&&flag2==false) {
+            flag2=true;      
+        }
+        if(c=='3'&&flag3==false) {
+            flag3=true;       
+        }
+        if(c=='4'&&flag6==false) {
+            flag6=true;       
+        }
+    }
+}
+void btn_1(){
+    if(button1==1&&flag4==false){
+        BLUETOOTH.putc('!');
+        flag4=true;
+        }
+        if(button1==0){
+            flag4=false;
+            }
+    }
+    
+void btn_2(){
+    if(button2==1&&flag5==false){
+        BLUETOOTH.putc('?');
+        flag5=true;
+        }
+        if(button2==0){
+            flag5=false;
+            }
+    }
+
+    
+int main()
+{
+    PC.baud(115200);
+    IN1=IN3=IN5=vib=1;
+    t3.attach(act, 0.1);
+    t2.attach(read, 0.1);
+    t4.attach(btn_1, 0.1);
+    t5.attach(btn_2,0.1);
+    
+    while(1) {
+    if(AHRS.readable()) {
+    BLUETOOTH.putc(AHRS.getc());
+       }
+       }
+    }
+```
 
 
 
