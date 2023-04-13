@@ -38,11 +38,81 @@
 
 바이브레이터는 하나가 부착되어 있기 때문에 각 액추에이터가 작동할 때 마다 작동하도록 하였습니다.<br>
 액추에이터가 작동할 때 마다 진동이 울리기 때문에 더욱 현실감 있는 타격감을 만들어 냈습니다.
+```c
+void act() //각 flag의 상태에 따라 액추에이터,진동모터 
+{
+    if (flag1 == true)
+    {
+        IN1 = 0;
+        vib = 0;
+        flag1 = false;  
+    }else if( flag2 ==true)
+    {
+        IN5 = 0;
+        vib = 0;
+        flag2 = false;  
+    }else if(flag3==true)
+    {
+        IN3 = 0;
+        vib = 0;
+        flag3 = false;  
+    }
+    else
+    {   
+        IN1 = 1;
+        IN3 = 1;
+        IN5 = 1;
+        vib = 1;
+    }       
+} 
+void read() //값을 읽어오는 함수
+{
+    if(BLUETOOTH.readable()){
+        char c=BLUETOOTH.getc();
+        if(c=='1'&&flag1==false) {
+            flag1=true;       
+        }
+        if(c=='2'&&flag2==false) {
+            flag2=true;      
+        }
+        if(c=='3'&&flag3==false) {
+            flag3=true;       
+        }
+    }
+}
+```
+    액추에이터와 바이브레이터 작동 함수입니다.
+    블루투스로 전달받은 값에 따라 액추에이터와 진동모터가 작동합니다.
+    변수의 값이 바뀌고 액추에이터와 진동모터가 계속 작동하는 것을 방지하기 위해 flag변수를 사용했습니다.
 
 #### 버튼
 
 버튼은 두 개를 연결하여 각 버튼을 누를 시 데이터를 보내 투구와 배트 위치 초기화의 역할을 수행합니다.
-
+```c
+void btn_1(){
+    if(button1==1&&flag4==false){
+        BLUETOOTH.putc('!');
+        flag4=true;
+        }
+        if(button1==0){
+            flag4=false;
+            }
+    }
+    
+void btn_2(){
+    if(button2==1&&flag5==false){
+        BLUETOOTH.putc('?');
+        flag5=true;
+        }
+        if(button2==0){
+            flag5=false;
+            }
+    }
+ ```
+    버튼 작동 함수입니다.
+    각 버튼을 누르면 인게임으로 각 데이터를 보내 각자의 역할을 수행합니다.
+    마찬가지로 값이 계속 들어가는 것을 방지하기위해 flag변수를 사용했습니다.
+    
 #### 블루투스 모듈
 
 블루투스 모듈을 연결하여 무선으로 컴퓨터와 연결이 가능하도록 해 인게임과 배트 간에 데이터 입출력을 무선으로 할 수 있도록 했습니다. 
@@ -50,6 +120,25 @@
 #### AHRS
 
 배트의 각속도 값, 위치 값을 얻기 위한 센서입니다. AHRS를 통해 얻은 데이터를 인게임으로 보내 배트의 움직임을 구현합니다.
+```c
+int main()
+{
+    PC.baud(115200);
+    IN1=IN3=IN5=vib=1;
+    t3.attach(act, 0.1);
+    t2.attach(read, 0.1);
+    t4.attach(btn_1, 0.1);
+    t5.attach(btn_2,0.1);
+    
+    while(1) {
+    if(AHRS.readable()) {
+    BLUETOOTH.putc(AHRS.getc());
+       }
+       }
+    }
+```
+    배트의 끊김없고 부드러운 모션을 위해서 티커를 활용하는 것이 아닌 while문 안에 AHRS의 값을 보내는 코드를 넣었습니다.
+    값을 읽고 액추에이터와 센서를 작동시키는 함수와 버튼 작동 는 티커를 활용하여 0.1초에 한 번씩 실행시킵니다.
 
 #### 레귤레이터
 
