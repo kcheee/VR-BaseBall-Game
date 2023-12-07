@@ -1,19 +1,22 @@
-# 📖 프로젝트 명
+# ✏️ 프로젝트 명
 ### VR-BaseBall 
+Unity 2019.3.26f1 
 
 ![vr](https://github.com/kcheee/VR-BaseBall-Game/assets/79074052/85033647-23c3-46d9-8e2b-fc4298a20524)
 
-2022.08.08 ~ 2022.12.16   
-Unity 2019.3.26f1    
+# 📆 프로젝트 기간    
+2022.08.08 ~ 2022.12.16    
 
 # 📃 프로젝트 소개
 
 ### VR 기반 야구 게임입니다.
-
-**Game** : VR Game  
-**Game mode**: First-Person Baseball Hitting Game     
-**Software** : Unity  
-**Language** : C#   
+|Category|Content|
+|:---:|:---:|
+|**Game**| VR Game|  
+|**Game mode**| First-Person Baseball Hitting Game|     
+|**Software**|  Unity|  
+|**Language**|  C#|   
+  
 
 # 👩‍🔧 팀원 소개 및 역할
 
