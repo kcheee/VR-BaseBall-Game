@@ -11,7 +11,7 @@ Unity 2019.3.26f1
 ### VR 기반 야구 게임입니다.
 
 **Game** : VR Game  
-**Game mode**: first person striker mode     
+**Game mode**: first person striker     
 **Software** : Unity  
 **Language** : C#   
 
