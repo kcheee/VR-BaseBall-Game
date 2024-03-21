@@ -20,51 +20,44 @@ Unity 2019.3.26f1
 
 ✔️ 팀원   
 
-🔹 SoftWare(Unity)   
-<p>강찬희 :</p>
-<p>고주현 :</p> 
+🔹 SoftWare(Unity) 
+<br></br>
+### 강찬희 : 
+  - 시리얼포트를 통한 데이터 통신 구성
+  - AHRS data Parsing 및 가상의 배트 오브젝트 trasnform 적용
+  - 배트 위치에너지에 따른 운동에너지 계산
+  - actuator vibration motor를 통한 타격감 구성
+  - 포물선 운동을 통한 공의 예측지점
 
+### 고주현 : 
+  - 야구 수비 시스템
+  - score 시스템
+  - 출루 시스템
+  
 🔹 HardWare   
-<p>이준호 :</p>
-<p>김희도 :</p> 
+
+### 이준호 : 
+  - 배트 도면 제작
+  - 배트 설계 및 제작
+  - 하드웨어 구성
+
+### 김희도 :
+  - 배트 3d 프린팅
+  - 배트 설계 및 제작
+  - 하드웨어 구성
     
 
-# 📅 진행 기록
-
-
-
 # 💡 주요내용
-
-<details>
-<summary>   
- 
-### 기획
-</summary>
-    PPT: https://drive.google.com/drive/u/0/folders/1FuUakJZkQ2Up51Opq5To0raYUu4l0Bxj
-</details>
-
-<details>
-<summary>      
- 
-### 개발
-</summary>
-내용
-</details>
-
 
 
 # 🛠 기술 스택   
 ### XR
- <img src="https://www.vectorlogo.zone/logos/unity3d/unity3d-icon.svg" alt="unity" width="40" height="40"/> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp" width="40" height="40"/>
-
-### ETC
-깃허브 노션 구글드라이브 (피그마)? 아이콘 추가해야됌.
+ <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"> <img src="https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white"> <img src="https://img.shields.io/badge/oculus-1C1E20?style=for-the-badge&logo=oculus&logoColor=white">
+ 
+### Hardware   
+ <img src="https://img.shields.io/badge/C-239120?style=for-the-badge&logo=c&logoColor=white"> <img src="https://img.shields.io/badge/arduino-00878F?style=for-the-badge&logo=arduino&logoColor=white">
 
 # 📃 결과물   
 ### 시연영상
 [![Video Label](http://img.youtube.com/vi/UHFD1X_e1nc/0.jpg)](https://youtu.be/UHFD1X_e1nc)
 
-### 발표 자료   
-
-
-# 🔍 참고 자료   
