@@ -58,6 +58,13 @@ Unity 2019.3.26f1
  <img src="https://img.shields.io/badge/C-239120?style=for-the-badge&logo=c&logoColor=white"> <img src="https://img.shields.io/badge/arduino-00878F?style=for-the-badge&logo=arduino&logoColor=white">
 
 # 📃 결과물   
+
+### 도면
+![227450107-f5520905-edb5-424f-b13c-5caeb32f6edc](https://github.com/kcheee/VR-BaseBall-Game/assets/86779278/7b434e0f-611b-4515-8a02-7b96857c2f1a)
+
+### 3d 프린트   
+![image (4)](https://github.com/kcheee/VR-BaseBall-Game/assets/86779278/75fa1430-f7b2-4309-91c5-c010839664aa)
+
 ### 시연영상
 [![Video Label](http://img.youtube.com/vi/UHFD1X_e1nc/0.jpg)](https://youtu.be/UHFD1X_e1nc)
 
